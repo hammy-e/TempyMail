@@ -19,6 +19,9 @@
 		33217824277AA13D005D5F41 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33217823277AA13D005D5F41 /* OpenSans-ExtraBold.ttf */; };
 		3333D215277C469800E7FF3C /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333D214277C469800E7FF3C /* Email.swift */; };
 		3333D217277C46F700E7FF3C /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333D216277C46F700E7FF3C /* EmailCell.swift */; };
+		3347D657277EBD89001C479E /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3347D656277EBD89001C479E /* SwiftyJSON */; };
+		336CFF5C277EF35F005DFFDC /* GuerrillaMailAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336CFF5B277EF35F005DFFDC /* GuerrillaMailAPIService.swift */; };
+		33B6159B278E701B006A24DF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6159A278E701B006A24DF /* Session.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,8 @@
 		33217823277AA13D005D5F41 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		3333D214277C469800E7FF3C /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		3333D216277C46F700E7FF3C /* EmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCell.swift; sourceTree = "<group>"; };
+		336CFF5B277EF35F005DFFDC /* GuerrillaMailAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuerrillaMailAPIService.swift; sourceTree = "<group>"; };
+		33B6159A278E701B006A24DF /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3347D657277EBD89001C479E /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +74,7 @@
 		33072096277A81CF00E84E72 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				33B6159A278E701B006A24DF /* Session.swift */,
 				3333D214277C469800E7FF3C /* Email.swift */,
 			);
 			path = Model;
@@ -104,6 +111,7 @@
 				33072096277A81CF00E84E72 /* Model */,
 				33072095277A81C700E84E72 /* View */,
 				33072094277A81BD00E84E72 /* Controller */,
+				336CFF5A277EF32F005DFFDC /* API */,
 				33072097277A81F000E84E72 /* Utils */,
 				33217822277AA112005D5F41 /* Fonts */,
 				330A866D2779B12C001CEF91 /* AppDelegate.swift */,
@@ -125,6 +133,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		336CFF5A277EF32F005DFFDC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				336CFF5B277EF35F005DFFDC /* GuerrillaMailAPIService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,6 +157,9 @@
 			dependencies = (
 			);
 			name = TempyMail;
+			packageProductDependencies = (
+				3347D656277EBD89001C479E /* SwiftyJSON */,
+			);
 			productName = TempyMail;
 			productReference = 330A866A2779B12C001CEF91 /* TempyMail.app */;
 			productType = "com.apple.product-type.application";
@@ -169,6 +188,9 @@
 				Base,
 			);
 			mainGroup = 330A86612779B12C001CEF91;
+			packageReferences = (
+				3347D655277EBD89001C479E /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 330A866B2779B12C001CEF91 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -197,6 +219,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B6159B278E701B006A24DF /* Session.swift in Sources */,
+				336CFF5C277EF35F005DFFDC /* GuerrillaMailAPIService.swift in Sources */,
 				3307209B277A839000E84E72 /* Extensions.swift in Sources */,
 				3333D215277C469800E7FF3C /* Email.swift in Sources */,
 				3333D217277C46F700E7FF3C /* EmailCell.swift in Sources */,
@@ -424,6 +448,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3347D655277EBD89001C479E /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3347D656277EBD89001C479E /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3347D655277EBD89001C479E /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 330A86622779B12C001CEF91 /* Project object */;
 }

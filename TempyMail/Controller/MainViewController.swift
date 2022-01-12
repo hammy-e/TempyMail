@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 private let cellIdentifier: String = "cell"
 
@@ -14,6 +15,8 @@ class MainViewController: UIViewController {
     // MARK: - Properties
     
     private var inbox: [Email] = []
+    
+    private var API = GuerrillaMailAPIService()
     
     private let tempyMailLabel: UILabel = {
         let label = UILabel()
@@ -29,27 +32,30 @@ class MainViewController: UIViewController {
         tf.layer.cornerRadius = 16
         tf.textAlignment = .center
         tf.placeholder = "Please Refresh Email"
+        tf.isEnabled = false
         tf.setHeight(42)
         return tf
     }()
     
-    private let newAddressButton: UIButton = {
+    private lazy var newAddressButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("New Email", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setDimensions(height: 40, width: 90)
         button.layer.cornerRadius = 16
         button.backgroundColor = CUSTOMGREEN
+        button.addTarget(self, action: #selector(handleNewAddressTapped), for: .touchUpInside)
         return button
     }()
     
-    private let copyToClipboardButton: UIButton = {
+    private lazy var copyToClipboardButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Copy", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setDimensions(height: 40, width: 90)
         button.layer.cornerRadius = 16
         button.backgroundColor = CUSTOMGREEN
+        button.addTarget(self, action: #selector(handleCopyToClipboardTapped), for: .touchUpInside)
         return button
     }()
     
@@ -64,6 +70,7 @@ class MainViewController: UIViewController {
     private let inboxTableView: UITableView = {
         let tw = UITableView()
         tw.backgroundColor = CUSTOMGRAY
+        tw.layer.cornerRadius = 12
         tw.rowHeight = 80
         return tw
     }()
@@ -75,6 +82,8 @@ class MainViewController: UIViewController {
         configureUI()
         inboxTableView.dataSource = self
         inboxTableView.delegate = self
+        API.delegate = self
+        API.startSession()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +94,16 @@ class MainViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
+    }
+    
+    // MARK: - Actions
+    
+    @objc func handleNewAddressTapped() {
+        print("new address")
+    }
+    
+    @objc func handleCopyToClipboardTapped() {
+        print("copy to clipboard")
     }
     
     // MARK: - Helpers
@@ -129,12 +148,23 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-
 // MARK: - UITableViewDelegate
 
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+// MARK: - GuerrillaMailAPIServiceDelegate
+
+extension MainViewController: GuerrillaMailAPIServiceDelegate {
+    
+    func didStartSession(data: JSON) {
+        let session = Session(data: data)
+        DispatchQueue.main.async {
+            self.emailTextField.text = session.emailAddress
+        }
     }
 }
